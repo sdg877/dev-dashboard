@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Tasks from './pages/Tasks';
+
 
 function App() {
   const [message, setMessage] = useState('');
@@ -15,6 +17,7 @@ function App() {
     <div>
       <h1>Dev Dashboard</h1>
       <p>API says: {message}</p>
+      <Route path="/tasks" element={<Tasks />} />
     </div>
   );
 }
