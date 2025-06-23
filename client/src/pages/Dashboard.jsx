@@ -31,10 +31,16 @@ const Dashboard = () => {
     fetchDashboard();
   }, [navigate]);
 
+  const handleLogout = () => {
+    localStorage.removeItem('token'); 
+    navigate('/login');              
+  };
+
   return (
     <div>
       <h1>Dev Dashboard</h1>
       <p>{message || 'Loading...'}</p>
+      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 };
