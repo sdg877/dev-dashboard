@@ -23,7 +23,7 @@ const Dashboard = () => {
         setMessage(res.data.msg);
       } catch (err) {
         console.error('Dashboard error:', err);
-        localStorage.removeItem('token'); // clear invalid token
+        localStorage.removeItem('token'); 
         navigate('/login');
       }
     };
