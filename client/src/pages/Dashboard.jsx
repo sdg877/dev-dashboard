@@ -32,7 +32,7 @@ const Dashboard = () => {
   }, [navigate]);
 
   return (
-    <div style={{ padding: '2rem' }}>
+    <div>
       <h1>Dev Dashboard</h1>
       <p>{message || 'Loading...'}</p>
     </div>
