@@ -42,8 +42,17 @@ router.post('/login', async (req, res) => {
 
 
 // GET /dashboard (protected)
-router.get('/dashboard', auth, (req, res) => {
-  res.json({ msg: `Welcome, user ${req.user}` });
+router.get('/dashboard', auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user).select('-password');
+    if (!user) return res.status(404).json({ msg: 'User not found' });
+
+    res.json({ msg: `Welcome, ${user.username}`, user });
+  } catch (err) {
+    console.error('Dashboard error:', err);
+    res.status(500).json({ error: err.message });
+  }
 });
+
 
 module.exports = router;
