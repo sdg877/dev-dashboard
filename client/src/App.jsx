@@ -11,7 +11,7 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Tasks from './pages/Tasks';
-import GitHubSearch from './GitHubSearch';
+import GitHubSearch from './pages/GitHubSearch';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
