@@ -23,7 +23,7 @@ router.post('/register', async (req, res) => {
   }
 });
 
-// POST /login
+
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -34,11 +34,12 @@ router.post('/login', async (req, res) => {
     if (!isMatch) return res.status(400).json({ msg: 'Invalid credentials' });
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-    res.json({ token, user: { id: user._id, username, email } });
+    res.json({ token, user: { id: user._id, username: user.username, email } });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
+
 
 // GET /dashboard (protected)
 router.get('/dashboard', auth, (req, res) => {
