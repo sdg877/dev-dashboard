@@ -11,6 +11,7 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Tasks from './pages/Tasks';
+import GitHubSearch from './GitHubSearch';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -27,11 +28,12 @@ function App() {
   return (
     <Router>
         <Routes>
-          <Route path="/" element={<Navigate to="/dashboard" />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/tasks" element={<Tasks />} />
+          <Route path="/github" element={<GitHubSearch />} />
+          <Route path="/" element={<Navigate to="/dashboard" />} />
         </Routes>
     </Router>
   );
