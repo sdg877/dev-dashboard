@@ -1,16 +1,16 @@
-// GitHubSearch.jsx
-import React, { useState } from 'react';
+// src/components/GitHubSearch.jsx
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const GitHubSearch = () => {
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState('your-github-username'); // replace this
   const [profile, setProfile] = useState(null);
   const [repos, setRepos] = useState([]);
 
-  const handleSearch = async () => {
+  const fetchData = async (user) => {
     try {
-      const userRes = await axios.get(`https://api.github.com/users/${username}`);
-      const reposRes = await axios.get(`https://api.github.com/users/${username}/repos`);
+      const userRes = await axios.get(`https://api.github.com/users/${user}`);
+      const reposRes = await axios.get(`https://api.github.com/users/${user}/repos`);
       setProfile(userRes.data);
       setRepos(reposRes.data);
     } catch (err) {
@@ -18,6 +18,14 @@ const GitHubSearch = () => {
       setProfile(null);
       setRepos([]);
     }
+  };
+
+  useEffect(() => {
+    fetchData(username); // auto-fetch your profile when component loads
+  }, []);
+
+  const handleSearch = () => {
+    fetchData(username);
   };
 
   return (
