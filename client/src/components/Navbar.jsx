@@ -1,22 +1,14 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import '../styles/components.css'; // ✅ Single shared CSS file
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
-  const navigate = useNavigate();
-
-  const logout = () => {
-    localStorage.removeItem('token');
-    navigate('/login');
-  };
-
   return (
-    <nav className="navbar">
-      <div className="navbar-links">
-        <Link to="/dashboard">Dashboard</Link>
-        <Link to="/tasks">Tasks</Link>
-      </div>
-      <button onClick={logout} className="logout-button">Logout</button>
+    <nav style={{ padding: '1rem', borderBottom: '1px solid #ccc' }}>
+      <Link to="/" style={{ marginRight: '1rem' }}>Home</Link>
+      <Link to="/profile" style={{ marginRight: '1rem' }}>Profile</Link>
+      <Link to="/settings" style={{ marginRight: '1rem' }}>Settings</Link>
+      <Link to="/dashboard" style={{ marginRight: '1rem' }}>Dashboard</Link>
+      <Link to="/login">Login</Link>
     </nav>
   );
 };
