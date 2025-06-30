@@ -1,9 +1,8 @@
-// src/components/GitHubSearch.jsx
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const GitHubSearch = () => {
-  const [username, setUsername] = useState('your-github-username'); // replace this
+  const [username, setUsername] = useState('sdg877'); 
   const [profile, setProfile] = useState(null);
   const [repos, setRepos] = useState([]);
 
@@ -21,7 +20,7 @@ const GitHubSearch = () => {
   };
 
   useEffect(() => {
-    fetchData(username); // auto-fetch your profile when component loads
+    fetchData(username);
   }, []);
 
   const handleSearch = () => {
@@ -41,7 +40,7 @@ const GitHubSearch = () => {
 
       {profile && (
         <div>
-          <h3>{profile.name} ({profile.login})</h3>
+          <h3>{profile.name || 'No name'} ({profile.login})</h3>
           <img src={profile.avatar_url} alt={profile.login} width="100" />
           <p>{profile.bio}</p>
           <a href={profile.html_url} target="_blank" rel="noreferrer">GitHub Profile</a>
