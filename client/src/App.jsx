@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Navbar from './components/Navbar';
 import GitHub from './pages/GitHub';
+import GitHubCallback from './pages/GitHubCallback';
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/github" element={<GitHub />} /> 
+        <Route path="/github/callback" element={<GitHubCallback />} />
         <Route path="/" element={<Home />} /> 
       </Routes>
     </Router>
