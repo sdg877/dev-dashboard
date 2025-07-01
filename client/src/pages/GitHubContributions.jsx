@@ -7,15 +7,12 @@ const token = process.env.REACT_APP_GITHUB_TOKEN;
 const query = gql`
   query {
     viewer {
-      login
       contributionsCollection {
         contributionCalendar {
-          totalContributions
           weeks {
             contributionDays {
-              contributionCount
               date
-              color
+              contributionCount
             }
           }
         }
@@ -25,59 +22,55 @@ const query = gql`
 `;
 
 const GitHubContributions = () => {
-  const [days, setDays] = useState([]);
-  const [error, setError] = useState(null);
+  const [weeks, setWeeks] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log('GitHub Token:', token);  
-      if (!token) {
-        setError('GitHub token is missing. Please check your .env file.');
-        return;
-      }
-
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
       try {
-        const headers = {
-          Authorization: `Bearer ${token}`,
-        };
-
         const data = await request('https://api.github.com/graphql', query, {}, headers);
-
-        const allDays = data.viewer.contributionsCollection.contributionCalendar.weeks
-          .flatMap(week => week.contributionDays);
-
-        setDays(allDays);
-        setError(null);
-      } catch (err) {
-        console.error('Error fetching GitHub data:', err);
-        setError('Failed to fetch GitHub data. Check your token permissions or network.');
+        setWeeks(data.viewer.contributionsCollection.contributionCalendar.weeks);
+      } catch (error) {
+        console.error('Error fetching GitHub data:', error);
       }
     };
 
     fetchData();
   }, []);
 
-  if (error) {
-    return <div style={{ color: 'red' }}>Error: {error}</div>;
-  }
+  const colorScale = [
+    '#f0f0ff',
+    '#d0c4ff',
+    '#a58bff',
+    '#7c51ff',
+    '#521fdc',
+  ];
+
+  const getColor = (count) => {
+    if (count === 0) return colorScale[0];
+    if (count < 5) return colorScale[1];
+    if (count < 10) return colorScale[2];
+    if (count < 20) return colorScale[3];
+    return colorScale[4];
+  };
 
   return (
     <div>
-      <h2>GitHub Contribution Calendar</h2>
-      <div className="contribution-calendar" style={{ display: 'flex', flexWrap: 'wrap', maxWidth: '420px' }}>
-        {days.map((day, i) => (
-          <div
-            key={i}
-            className="contribution-day"
-            style={{
-              backgroundColor: day.color,
-              width: '14px',
-              height: '14px',
-              margin: '1px',
-              borderRadius: '3px',
-            }}
-            title={`${day.date}: ${day.contributionCount} contributions`}
-          />
+      <h2>My Contributions</h2>
+      <div className="contribution-calendar">
+        {weeks.map((week, i) => (
+          <div key={i} className="week-column">
+            {week.contributionDays.map((day, j) => (
+              <div
+                key={j}
+                className="contribution-day"
+                style={{ backgroundColor: getColor(day.contributionCount) }}
+                title={`${day.date}: ${day.contributionCount} contributions`}
+              />
+            ))}
+          </div>
         ))}
       </div>
     </div>
