@@ -1,14 +1,29 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import '../styles/components.css';
 
 const Navbar = () => {
+  const location = useLocation();
+
+  const links = [
+    { to: '/', label: 'Home' },
+    { to: '/profile', label: 'Profile' },
+    { to: '/settings', label: 'Settings' },
+    { to: '/dashboard', label: 'Dashboard' },
+    { to: '/login', label: 'Login' }
+  ];
+
   return (
-    <nav style={{ padding: '1rem', borderBottom: '1px solid #ccc' }}>
-      <Link to="/" style={{ marginRight: '1rem' }}>Home</Link>
-      <Link to="/profile" style={{ marginRight: '1rem' }}>Profile</Link>
-      <Link to="/settings" style={{ marginRight: '1rem' }}>Settings</Link>
-      <Link to="/dashboard" style={{ marginRight: '1rem' }}>Dashboard</Link>
-      <Link to="/login">Login</Link>
+    <nav className="navbar">
+      <div className="navbar-links">
+        {links
+          .filter(link => link.to !== location.pathname)
+          .map(link => (
+            <Link key={link.to} to={link.to}>
+              {link.label}
+            </Link>
+          ))}
+      </div>
     </nav>
   );
 };
