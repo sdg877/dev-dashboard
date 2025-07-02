@@ -22,3 +22,11 @@
   transform: scale(1.3);
   cursor: pointer;
 }
+
+.contribution-calendar,
+.week-column,
+.contribution-day {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
