@@ -30,3 +30,39 @@
   margin: 0;
   padding: 0;
 }
+
+.github-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.github-container h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.github-container a {
+  color: #6c63ff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.github-container a:hover {
+  text-decoration: underline;
+}
+
+.github-container .repo-item {
+  border: 1px solid #eee;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  transition: box-shadow 0.3s;
+}
+
+.github-container .repo-item:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
